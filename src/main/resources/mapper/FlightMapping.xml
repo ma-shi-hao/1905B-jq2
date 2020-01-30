@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="com.fh.dao.FlightDao">
+    <select id="queryPlaneList" resultType="com.fh.bean.po.PlaneType">
+          select *from jq_plane_type
+    </select>
+    <select id="queryAreaList" resultType="com.fh.bean.po.Area">
+                  select *from jq_area
+    </select>
+    <select id="queryTwo" resultType="com.fh.bean.po.Area" parameterType="java.lang.Integer">
+          select * from jq_area where pid=#{id}
+    </select>
+    <select id="queryThree" resultType="com.fh.bean.po.Area" parameterType="java.lang.Integer">
+          select * from jq_area where pid=#{id}
+    </select>
+    <select id="queryCount" resultType="long">
+         select count(f.id) from jq_flight  f
+        left JOIN jq_area a on f.areaId=a.id
+        left JOIN jq_plane_type p on f.planeId=p.id
+        left JOIN jq_flight_ticket t on f.ticketId=t.id
+    </select>
+    <select id="queryPageList" resultType="com.fh.bean.vo.Flight" parameterType="com.fh.bean.vo.Flight">
+        select f.id,f.flightName,t.price,t.totalCount,f.startTime,f.endTime,a.areaName,p.planeName from jq_flight  f
+        left JOIN jq_area a on f.areaId=a.id
+        left JOIN jq_plane_type p on f.planeId=p.id
+        left JOIN jq_flight_ticket t on f.ticketId=t.id
+    </select>
+    <select id="queryTicket" resultType="com.fh.bean.po.FlightTicket">
+        select * from jq_flight_ticket
+    </select>
+</mapper>
