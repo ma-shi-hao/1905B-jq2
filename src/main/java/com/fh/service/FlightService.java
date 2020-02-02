@@ -19,4 +19,10 @@ public interface FlightService {
     void addFlight(Flight flight);
 
     void queryPageList(PageBean<Flight> page);
+
+    void delFlight(Integer id);
+
+    void delAll(String ids);
+
+    List<Flight> queryName(Integer id);
 }

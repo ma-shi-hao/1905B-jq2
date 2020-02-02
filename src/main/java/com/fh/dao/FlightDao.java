@@ -25,4 +25,6 @@ public interface FlightDao extends BaseMapper<Flight> {
     List<Flight> queryPageList(PageBean<Flight> page);
 
     FlightTicket queryTicket();
+
+    List<Flight> queryName(Integer id);
 }

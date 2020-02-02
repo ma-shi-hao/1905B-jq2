@@ -31,4 +31,10 @@
     <select id="queryTicket" resultType="com.fh.bean.po.FlightTicket">
         select * from jq_flight_ticket
     </select>
+    <select id="queryName" parameterType="java.lang.Integer" resultType="com.fh.bean.vo.Flight">
+ select f.id,f.flightName,t.price,t.totalCount,f.startTime,f.endTime,a.areaName,p.planeName from jq_flight  f
+        left JOIN jq_area a on f.areaId=a.id
+        left JOIN jq_plane_type p on f.planeId=p.id
+        left JOIN jq_flight_ticket t on f.ticketId=t.id
+    </select>
 </mapper>

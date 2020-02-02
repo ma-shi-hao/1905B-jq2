@@ -2,7 +2,6 @@ package com.fh.service.impl;
 
 import com.fh.bean.po.Area;
 import com.fh.bean.po.Flight;
-import com.fh.bean.po.FlightTicket;
 import com.fh.bean.po.PlaneType;
 import com.fh.dao.FlightDao;
 import com.fh.service.FlightService;
@@ -39,8 +38,6 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void addFlight(Flight flight) {
-        FlightTicket flightTicket=flightDao.queryTicket();
-
         flightDao.insert(flight);
     }
 
@@ -51,6 +48,24 @@ public class FlightServiceImpl implements FlightService {
           page.setRecordsFiltered(count);
           List<Flight> list=flightDao.queryPageList(page);
           page.setList(list);
+    }
+
+    @Override
+    public void delFlight(Integer id) {
+        flightDao.deleteById(id);
+    }
+
+    @Override
+    public void delAll(String ids) {
+        String[] split = ids.split(",");
+        for (int i = 0; i <split.length ; i++) {
+                flightDao.deleteById(split[i]);
+        }
+    }
+
+    @Override
+    public List<Flight> queryName(Integer id) {
+        return flightDao.queryName(id);
     }
 
 }

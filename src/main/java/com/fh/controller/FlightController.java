@@ -7,6 +7,7 @@ import com.fh.service.FlightService;
 import com.fh.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,5 +60,24 @@ public class FlightController {
     public PageBean<Flight> queryPageList(PageBean<Flight> page){
         flightService.queryPageList(page);
           return page;
+    }
+    @RequestMapping("/delFlight")
+    public void delFlight(Integer id){
+         flightService.delFlight(id);
+    }
+    @PostMapping("/delAll")
+    public Map  delAll(String ids){
+        Map  map=new HashMap();
+        flightService.delAll(ids);
+        map.put("code",200);
+        map.put("message","success");
+        return map;
+    }
+    @PostMapping("/queryName")
+    public Map  queryName(Integer id){
+        Map map=new HashMap();
+        List<Flight> list=flightService.queryName(id);
+        map.put("data",list);
+        return map;
     }
 }
